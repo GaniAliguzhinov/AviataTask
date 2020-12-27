@@ -48,10 +48,10 @@ def is_valid(response, booking_token):
         return False
     num_tries = 1
     while not response['flights_checked']:
-        time.sleep(2)
+        time.sleep(1)
         response = check_flights(booking_token)
         num_tries += 1
-        if num_tries >= 5:
+        if num_tries >= 10:
             return False
     return True
 
@@ -111,4 +111,4 @@ def search(fly_from, fly_to, date_from, date_to):
         response_trimmed['booking_token'] = response['booking_token']
         response_trimmed['price'] = response['price']
         response_trimmed['departure_date'] = response['local_departure']
-        return response
+        return response_trimmed

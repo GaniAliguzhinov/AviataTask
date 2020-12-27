@@ -5,3 +5,4 @@ djangorestframework
 requests
 celery
 redis
+django-celery-beat
