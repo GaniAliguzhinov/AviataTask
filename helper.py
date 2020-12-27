@@ -12,6 +12,15 @@ def convert_date(date):
     return datetime.datetime.strptime(date, "%d/%m/%Y").strftime("%Y-%m-%d")
 
 
+def increment_date(date):
+    """
+    Increment date by 1 day.
+    """
+    date = datetime.datetime.strptime(date, '%d/%m/%Y')
+    date += datetime.timedelta(days=1)
+    return date.strftime('%d/%m/%Y')
+
+
 def check_flights(booking_token, bnum=1, pnum=1):
     """
     Check a flight for pnum passangers and bnum baggages
@@ -98,4 +107,8 @@ def search(fly_from, fly_to, date_from, date_to):
         flights = check_and_sort(flights)
         response = next(iter(flights), None)
         assert response is not None
+        response_trimmed = {}
+        response_trimmed['booking_token'] = response['booking_token']
+        response_trimmed['price'] = response['price']
+        response_trimmed['departure_date'] = response['local_departure']
         return response
