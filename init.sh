@@ -8,7 +8,7 @@ sudo service redis-server restart
 
 sudo -H pip3 install --upgrade pip
 sudo -H pip3 install virtualenv
-# virtualenv venv
+virtualenv venv
 
 source venv/bin/activate
 pip install -r requirements.txt
