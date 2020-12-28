@@ -7,7 +7,7 @@
 * `source venv/bin/activate`
 * `./manage.py makemigrations`
 * `./manage.py migrate`
-* Uncomment the schedule
+* Uncomment the schedule at `Route/tasks.py`
 * `./manage.py migrate`
 * `./manage.py createsuperuser`
 * In one console: `./start_celery.sh`
