@@ -15,7 +15,7 @@ def search(request):
     API method of creating a Route object.
     This implicitly checks flights for given route.
     Parameters: fly_from, fly_to, date
-    Without date, returns flights for all cached 
+    Without date, returns flights for all cached
     dates for the given route.
     """
     if request.method == 'GET':
@@ -48,9 +48,9 @@ def search(request):
         elif all(v is not None for v in [fly_from, fly_to]):
             try:
                 routes = Route.objects.all().filter(fly_from=fly_from,
-                                                   fly_to=fly_to)
-                serializer = RouteSerializer(routes)
-                return Response(serializer.data)
+                                                    fly_to=fly_to)
+                serializer = {f'{route.date_from}': RouteSerializer(route).data for route in routes}
+                return Response(serializer)
             except AssertionError:
                 print('No flights found')
                 return Response()

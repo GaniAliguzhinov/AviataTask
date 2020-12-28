@@ -37,14 +37,14 @@ def update_all_routes():
         search_flight.delay(route.pk)
 
 
-at_0_am, _ = CrontabSchedule.objects.get_or_create(
-    minute="0", hour="0", day_of_week="*", day_of_month="*", month_of_year="*",
-    timezone=TIME_ZONE,
-)
-PeriodicTask.objects.update_or_create(
-    task="update_all_routes",
-    defaults=dict(
-        crontab=at_0_am,
-        expire_seconds=7200,
-    )
-)
+# at_0_am, _ = CrontabSchedule.objects.get_or_create(
+#     minute="0", hour="0", day_of_week="*", day_of_month="*", month_of_year="*",
+#     timezone=TIME_ZONE,
+# )
+# PeriodicTask.objects.update_or_create(
+#     task="update_all_routes",
+#     defaults=dict(
+#         crontab=at_0_am,
+#         expire_seconds=7200,
+#     )
+# )
