@@ -3,6 +3,7 @@
 ## Deploy
 
 * `./init.sh`
+* `export KIWI_API_KEY='API_SECRET'`
 * `source venv/bin/activate`
 * Comment out schedule setting in `Route/tasks.py`
 * `./manage.py makemigrations`
