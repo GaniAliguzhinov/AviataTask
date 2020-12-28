@@ -57,3 +57,23 @@ def search(request):
                 print('No flights found')
                 return Response()
     return Response()
+
+
+@api_view(['GET'])
+def api_home(request):
+    if request.method == 'GET':
+        pairs = [(r.fly_from, r.fly_to) for r in Route.objects.all()]
+        try:
+            all_routes = [Route.objects.all()
+                          .filter(fly_from=p[0],
+                                  fly_to=p[1]) for p in pairs]
+
+            serializers = {f'{routes[0].fly_from}-{routes[0].fly_to}':
+                           {f'{route.date_from}':
+                            (lambda r: r.data['response'].get('price', -1))
+                            (RouteSerializer(route)) for route in routes}
+                           for routes in all_routes}
+            return Response(serializers)
+        except AssertionError:
+            print('No flights found')
+            return Response()
