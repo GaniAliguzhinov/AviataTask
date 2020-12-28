@@ -20,3 +20,7 @@
 To view results, for example for ALA->MOW, use REST:
 
 `localhost:8000/api/search?fly_from=ALA&fly_to=MOW`
+
+To view whole calendar:
+
+`localhost:8000/api/`
