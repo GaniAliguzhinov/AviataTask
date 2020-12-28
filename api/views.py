@@ -1,10 +1,14 @@
 from django.shortcuts import render
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
 from Route.models import Route
 from Route.serializers import RouteSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from helper import convert_date
 from Route.tasks import search_flight
+
 
 import datetime
 
@@ -59,9 +63,9 @@ def search(request):
     return Response()
 
 
-@api_view(['GET'])
-def api_home(request):
-    if request.method == 'GET':
+class ApiView(APIView):
+    @method_decorator(cache_page(60*60*2))
+    def get(self, request, format=None):
         pairs = [(r.fly_from, r.fly_to) for r in Route.objects.all()]
         try:
             all_routes = [Route.objects.all()
