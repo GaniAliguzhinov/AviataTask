@@ -15,7 +15,7 @@
 * In yet another: `./manage.py runserver`
 * Now, run `python create_cal.py` to initialize route queries. Results can be viewed on `localhost:8000/routes/`
 
-P.S. Right now, every query made with the search API is saved and update each day. Better solution would be 
+P.S. Right now, every query made with the search API is saved and updated each day. Better solution would be 
 to have a config file with set routes and dates that need to be included in update.
 
 ## View calendar
