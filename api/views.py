@@ -49,7 +49,9 @@ def search(request):
             try:
                 routes = Route.objects.all().filter(fly_from=fly_from,
                                                     fly_to=fly_to)
-                serializer = {f'{route.date_from}': RouteSerializer(route).data for route in routes}
+                serializer = {f'{route.date_from}':
+                              (lambda r: r.data['response'].get('price', -1))
+                              (RouteSerializer(route)) for route in routes}
                 return Response(serializer)
             except AssertionError:
                 print('No flights found')
